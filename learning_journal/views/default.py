@@ -1,33 +1,35 @@
+"""Set the default for the application."""
+
 from pyramid.response import Response
-from pyramid.view import view_config
+import io
+import os
 
-from sqlalchemy.exc import DBAPIError
-
-from ..models import MyModel
-
-
-@view_config(route_name='home', renderer='../templates/mytemplate.jinja2')
-def my_view(request):
-    try:
-        query = request.dbsession.query(MyModel)
-        one = query.filter(MyModel.name == 'one').first()
-    except DBAPIError:
-        return Response(db_err_msg, content_type='text/plain', status=500)
-    return {'one': one, 'project': 'Learning Journal'}
+HERE = os.path.dirname(__file__)
 
 
-db_err_msg = """\
-Pyramid is having a problem using your SQL database.  The problem
-might be caused by one of the following things:
+def list_view(request):
+    """Create a home page."""
+    path = os.path.join(HERE, '../templates/list_view.html')
+    with io.open(path) as imported_text:
+        return Response(imported_text.read)
 
-1.  You may need to run the "initialize_learning_journal_db" script
-    to initialize your database tables.  Check your virtual
-    environment's "bin" directory for this script and try to run it.
 
-2.  Your database server may not be running.  Check that the
-    database server referred to by the "sqlalchemy.url" setting in
-    your "development.ini" file is running.
+def create_view(request):
+    """Create a new blog post."""
+    path = os.path.join(HERE, '../templates/create_view.html')
+    with io.open(path) as imported_text:
+        return Response(imported_text.read)
 
-After you fix the problem, please restart the Pyramid application to
-try it again.
-"""
+
+def detail_view(request):
+    """Show single blog post."""
+    path = os.path.join(HERE, '../templates/detail_view.html')
+    with io.open(path) as imported_text:
+        return Response(imported_text.read)
+
+
+def update_view(request):
+    """Show single blog post."""
+    path = os.path.join(HERE, '../templates/update_view.html')
+    with io.open(path) as imported_text:
+        return Response(imported_text.read)
