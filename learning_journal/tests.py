@@ -1,70 +1,41 @@
-
+"""Test default.py."""
 from pyramid import testing
 import pytest
 
 
+from learning_journal.views.default import(
+    list_view,
+    detail_view,
+    create_view,
+    update_view,
+)
+
+
 @pytest.fixture
 def dummy_request():
+    """Make dummy request fixture."""
     return testing.DummyRequest()
 
-def test_list_view(dummy_request):
-    from learning_journal.views.default import list_view
+
+def test_list_view_response_status_200(dummy_request):
+    """Test the list_view function to return a status 200 OK."""
+    response = list_view(dummy_request)
+    assert response.status_code == 200
 
 
+def test_detail_view_response_status_200(dummy_request):
+    """Test the list_view function to return a status 200 OK."""
+    response = list_view(dummy_request)
+    assert response.status_code == 200
 
 
-# class BaseTest(unittest.TestCase):
-#     def setUp(self):
-#         self.config = testing.setUp(settings={
-#             'sqlalchemy.url': 'sqlite:///:memory:'
-#         })
-#         self.config.include('.models')
-#         settings = self.config.get_settings()
-
-#         from .models import (
-#             get_engine,
-#             get_session_factory,
-#             get_tm_session,
-#             )
-
-#         self.engine = get_engine(settings)
-#         session_factory = get_session_factory(self.engine)
-
-#         self.session = get_tm_session(session_factory, transaction.manager)
-
-#     def init_database(self):
-#         from .models.meta import Base
-#         Base.metadata.create_all(self.engine)
-
-#     def tearDown(self):
-#         from .models.meta import Base
-
-#         testing.tearDown()
-#         transaction.abort()
-#         Base.metadata.drop_all(self.engine)
+def test_create_view_response_status_200(dummy_request):
+    """Test the list_view function to return a status 200 OK."""
+    response = list_view(dummy_request)
+    assert response.status_code == 200
 
 
-# class TestMyViewSuccessCondition(BaseTest):
-
-#     def setUp(self):
-#         super(TestMyViewSuccessCondition, self).setUp()
-#         self.init_database()
-
-#         from .models import MyModel
-
-#         model = MyModel(name='one', value=55)
-#         self.session.add(model)
-
-#     def test_passing_view(self):
-#         from .views.default import my_view
-#         info = my_view(dummy_request(self.session))
-#         self.assertEqual(info['one'].name, 'one')
-#         self.assertEqual(info['project'], 'Learning Journal')
-
-
-# class TestMyViewFailureCondition(BaseTest):
-
-#     def test_failing_view(self):
-#         from .views.default import my_view
-#         info = my_view(dummy_request(self.session))
-#         self.assertEqual(info.status_int, 500)
+def test_list_update_response_status_200(dummy_request):
+    """Test the list_view function to return a status 200 OK."""
+    response = list_view(dummy_request)
+    assert response.status_code == 200
