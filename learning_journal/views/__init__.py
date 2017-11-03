@@ -1,4 +1,5 @@
 """Doc string for __init__.py."""
+from learning_journal.views.default import list_view, detail_view, create_view, update_view
 
 
 def includeme(config):
