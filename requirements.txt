@@ -2,7 +2,6 @@ beautifulsoup4==4.6.0
 coverage==4.4.1
 hupper==1.0
 Jinja2==2.9.6
--e git+https://github.com/marco-zangari/pyramid-learning-journal.git@0d84da68ec2e129945fcb7344403f318116f931e#egg=learning_journal
 Mako==1.0.7
 MarkupSafe==1.0
 PasteDeploy==1.5.2
