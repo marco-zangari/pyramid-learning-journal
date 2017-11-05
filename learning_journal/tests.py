@@ -35,6 +35,17 @@ def test_list_view_returns_proper_amount_of_content():
     assert len(response['entries']) == len(ENTRIES)
 
 
+def test_detail_view():
+    """Test that what's returned by the view is a dictionary of values."""
+    request = testing.DummyRequest()
+    request.matchdict['id'] = 13
+    info = detail_view(request)
+    assert isinstance(info, dict)
+
+
+
+
+
 # def test_list_view_response_status_200(list_view_fixture):
 #     """Test the list_view function to return a status 200 OK."""
 #     response = list_view_fixture
