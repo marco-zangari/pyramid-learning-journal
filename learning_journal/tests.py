@@ -43,7 +43,13 @@ def test_detail_view():
     assert isinstance(info, dict)
 
 
-
+def test_detail_view_response_contains_entries_attrs():
+    """Test that what's returned by the view contains one expense object."""
+    request = testing.DummyRequest()
+    request.matchdict['id'] = 13
+    info = detail_view(request)
+    for key in ["creation_date", "id", "body", "title"]:
+        assert key in info['entry'].keys()
 
 
 # def test_list_view_response_status_200(list_view_fixture):
