@@ -2,10 +2,10 @@
 
 {% block content %}
     <article>
-        <h1><a href="{{ request.url }}"> {{ title }}</a></h1>
+        <h1><a href="{{ request.url }}"> {{ entry.id }}</a></h1>
         <hr />
-        <p>Created <strong>{{ entries.creation_date }}</strong></p>
+        <p>Created <strong>{{ entry.creation_date }}</strong></p>
         <hr />
-        <p>{{ body }}</p>
+        <p>{{ entry.body }}</p>
     </article>
 {% endblock %}

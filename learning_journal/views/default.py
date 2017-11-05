@@ -20,9 +20,9 @@ def create_view(request):
 def detail_view(request):
     """Show single blog post."""
     entry_id = int(request.matchdict['id'])
-
-
-    return {"entries": }
+    for entry in ENTRIES:
+        if entry['id'] == entry_id:
+            return {"entry": entry}
 
 
 @view_config(route_name='update', renderer='../templates/update.jinja2')
