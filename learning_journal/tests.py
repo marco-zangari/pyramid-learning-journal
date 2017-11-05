@@ -2,6 +2,7 @@
 """Test default.py."""
 from __future__ import unicode_literals
 from pyramid import testing
+from learning_journal.data.data_entries import ENTRIES
 import pytest
 
 
@@ -25,6 +26,13 @@ def test_list_view():
     request = testing.DummyRequest()
     info = list_view(request)
     assert isinstance(info, dict)
+
+
+def test_list_view_returns_proper_amount_of_content():
+    """Home view response has file content."""
+    request = testing.DummyRequest()
+    response = list_view(request)
+    assert len(response['entries']) == len(ENTRIES)
 
 
 # def test_list_view_response_status_200(list_view_fixture):
