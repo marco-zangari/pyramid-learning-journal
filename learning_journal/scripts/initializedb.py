@@ -1,11 +1,14 @@
+"""Initialize db module."""
+
 import os
 import sys
 import transaction
+import datetime
 
 from pyramid.paster import (
     get_appsettings,
     setup_logging,
-    )
+)
 
 from pyramid.scripts.common import parse_vars
 
@@ -14,11 +17,12 @@ from ..models import (
     get_engine,
     get_session_factory,
     get_tm_session,
-    )
+)
 from ..models import Journal
 
 
 def usage(argv):
+    """Take one argument in usage."""
     cmd = os.path.basename(argv[0])
     print('usage: %s <config_uri> [var=value]\n'
           '(example: "%s development.ini")' % (cmd, cmd))
@@ -26,6 +30,7 @@ def usage(argv):
 
 
 def main(argv=sys.argv):
+    """Take one argument for main."""
     if len(argv) < 2:
         usage(argv)
     config_uri = argv[1]
