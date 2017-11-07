@@ -13,7 +13,7 @@ def list_view(request):
     entry = request.dbsession.query(Journal).all()
     if entry is None:
         raise HTTPNotFound
-    return {"entries": ENTRIES}
+    return {"entries": entry}
 
 
 @view_config(route_name='create', renderer='../templates/create.jinja2')
