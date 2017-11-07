@@ -4,13 +4,14 @@ from pyramid.view import view_config
 from learning_journal.data.data_entries import ENTRIES
 from datetime import datetime
 from pyramid.httpexceptions import HTTPNotFound, HTTPFound, HTTPBadRequest
+from learning_journal.models.mymodel import Journal
 
 
 @view_config(route_name='home', renderer='../templates/list.jinja2')
 def list_view(request):
     """Create a home page."""
-    entry = request.dbsession.query(learning_journal).all()
-    if entry is NONE:
+    entry = request.dbsession.query(Journal).all()
+    if entry is None:
         raise HTTPNotFound
     return {"entries": ENTRIES}
 

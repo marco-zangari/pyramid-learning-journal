@@ -10,7 +10,7 @@ from sqlalchemy import (
 from .meta import Base
 
 
-class MyModel(Base):
+class Journal(Base):
     """Class for mymodel."""
     __tablename__ = 'models'
     id = Column(Integer, primary_key=True)
