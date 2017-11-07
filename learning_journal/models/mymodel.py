@@ -17,6 +17,3 @@ class MyModel(Base):
     title = Column(Unicode)
     body = Column(Unicode)
     creation_date = Column(DateTime)
-
-
-Index('my_index', MyModel.name, unique=True, mysql_length=255)
