@@ -1,3 +1,4 @@
+"""This is the docstring in my model."""
 from sqlalchemy import (
     Column,
     DateTime,

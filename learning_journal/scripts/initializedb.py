@@ -1,5 +1,4 @@
 """Initialize db module."""
-
 import os
 import sys
 import transaction
