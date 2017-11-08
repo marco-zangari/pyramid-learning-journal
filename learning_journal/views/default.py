@@ -26,9 +26,16 @@ def create_view(request):
 def detail_view(request):
     """Show single blog post."""
     entry_id = int(request.matchdict['id'])
-    for entry in ENTRIES:
-        if entry['id'] == entry_id:
-            return {"entry": entry}
+    entry = request.dbsession.query(Journal).get(entry_id)
+    if entry:
+        return {
+            "id": entry.id,
+            "title": entry.title,
+            "body": entry.body,
+            "creation_date": entry.creation_date
+        }
+    else:
+        raise HTTPNotFound
 
 
 @view_config(route_name='update', renderer='../templates/update.jinja2')
