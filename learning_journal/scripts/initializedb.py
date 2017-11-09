@@ -19,7 +19,6 @@ from ..models import (
     get_session_factory,
     get_tm_session,
 )
-from ..models import Journal
 
 
 def usage(argv):
@@ -38,6 +37,7 @@ def main(argv=sys.argv):
     options = parse_vars(argv[2:])
     setup_logging(config_uri)
     settings = get_appsettings(config_uri, options=options)
+    settings['sqlalchemy.url'] = os.environ.get('DATABASE_URL')
 
     engine = get_engine(settings)
     Base.metadata.drop_all(engine)
@@ -52,7 +52,6 @@ def main(argv=sys.argv):
             new_entry = Journal(
                 title=entry["title"],
                 body=entry["body"],
-                creation_date=datetime.now(),
             )
             journal_models.append(new_entry)
         dbsession.add_all(journal_models)
