@@ -3,6 +3,8 @@
 from __future__ import unicode_literals
 from pyramid import testing
 from learning_journal.data.data_entries import ENTRIES
+from learning_journal.models import Journal
+from datetime import datetime
 import pytest
 
 
@@ -18,7 +20,7 @@ def test_model_gets_added(db_session):
     model = Journal(
         title="Some description text",
         body="Some longer description than in the title",
-        creation_date=datetime.datetime.now(),
+        creation_date=datetime.now(),
     )
     db_session.add(model)
     assert len(db_session.query(Journal).all()) == 1

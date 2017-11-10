@@ -22,8 +22,8 @@ def configuration(request):
     def teardown():
         """Set teardown of database."""
         testing.tearDown()
-        request.addfinalizer(teardown)
-        return config
+    request.addfinalizer(teardown)
+    return config
 
 
 @pytest.fixture
