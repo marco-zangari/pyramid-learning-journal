@@ -5,6 +5,8 @@ from pyramid import testing
 from learning_journal.data.data_entries import ENTRIES
 from learning_journal.models import Journal
 from datetime import datetime
+from faker import Faker
+import random
 import pytest
 
 
@@ -33,6 +35,30 @@ def test_list_view_returns_dict(dummy_request):
     from learning_journal.views.default import list_view
     response = list_view(dummy_request)
     assert isinstance(response, dict)
+
+
+def test_list_view_returns_empty_when_database_empty(dummy_request):
+    """List view returns nothing when there is no data."""
+    from learning_journal.views.default import list_view
+    response = list_view(dummy_request)
+    assert len(response['entries']) == 0
+
+
+def test_list_view_returns_count_matching_database(dummy_request):
+    """Home view response matches database count."""
+    from learning_journal.views.default import list_view
+    response = list_view(dummy_request)
+    query = dummy_request.dbsession.query(Journal)
+    assert len(response['entries']) == query.count()
+
+FAKE_FACTORY = Faker()
+ENTRIES_LIST = [Journal(
+    title=FAKE_FACTORY.text(10),
+    body=FAKE_FACTORY.text(100),
+    creation_date=datetime.now(),
+) for i in range(20)]
+
+
 
 # @pytest.fixture
 # def list_view_fixture():

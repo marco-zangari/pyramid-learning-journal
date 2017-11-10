@@ -47,3 +47,9 @@ def db_session(configuration, request):
 def dummy_request(db_session):
     """Instantiate a fake HTTP Request, complete with a database session."""
     return testing.DummyRequest(dbsession=db_session)
+
+
+@pytest.fixture
+def add_models(dummy_request):
+    """Add a bunch of model instances to the database."""
+    dummy_request.dbsession.add_all(ENTRIES_LIST)
