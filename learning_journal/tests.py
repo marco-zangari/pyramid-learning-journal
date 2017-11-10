@@ -15,7 +15,9 @@ from learning_journal.views.default import (
     update_view,
 )
 
+
 def test_model_gets_added(db_session):
+    """Test the models are added to the database, as data_entries."""
     assert len(db_session.query(Journal).all()) == 0
     model = Journal(
         title="Some description text",
@@ -24,6 +26,13 @@ def test_model_gets_added(db_session):
     )
     db_session.add(model)
     assert len(db_session.query(Journal).all()) == 1
+
+
+def test_list_view_returns_dict(dummy_request):
+    """Home view returns a dictionary of values."""
+    from learning_journal.views.default import list_view
+    response = list_view(dummy_request)
+    assert isinstance(response, dict)
 
 # @pytest.fixture
 # def list_view_fixture():
