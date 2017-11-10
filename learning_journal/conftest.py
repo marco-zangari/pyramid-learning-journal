@@ -53,3 +53,33 @@ def dummy_request(db_session):
 def add_models(dummy_request):
     """Add a bunch of model instances to the database."""
     dummy_request.dbsession.add_all(ENTRIES_LIST)
+
+
+@pytest.fixture(scope="session")
+def testapp(request):
+    from webtest import TestApp
+    from learning_journal import main
+
+    app = main({}, **{"sqlalchemy.url": "postgres:///test_entries"})
+    testapp = TestApp(app)
+
+    SessionFactory = app.registry["dbsession_factory"]
+    engine = SessionFactory().bind
+    Base.metadata.create_all(bind=engine)
+
+    def tearDown():
+        Base.metadata.drop_all(bind=engine)
+
+    request.addfinalizer(tearDown)
+
+    return testapp
+
+
+@pytest.fixture
+def fill_the_db(testapp):
+    SessionFactory = testapp.app.registry["dbsession_factory"]
+    with transaction.manager:
+        dbsession = get_tm_session(SessionFactory, transaction.manager)
+        dbsession.add_all(ENTRIES)
+
+    return dbsession
