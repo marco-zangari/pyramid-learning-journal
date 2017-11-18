@@ -13,7 +13,9 @@ def list_view(request):
     entry = request.dbsession.query(Journal).all()
     if entry is None:
         raise HTTPNotFound
-    return {"entries": entry}
+    return {
+        "entries": entry
+    }
 
 
 @view_config(route_name='create', renderer='../templates/create.jinja2')
@@ -22,7 +24,7 @@ def create_view(request):
     if request.method == "POST":
             if not all([field in request.POST for field in ['title', 'body']]):
                 raise HTTPBadRequest
-            new_entry = Entry(
+            new_entry = Journal(
                 title=request.POST['title'],
                 creation_date=datetime.now().strftime('%B %d, %Y'),
                 body=request.POST['body']
