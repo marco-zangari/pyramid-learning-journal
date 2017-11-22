@@ -5,12 +5,12 @@
         <table>
                 <tr>
                         <td><label for="category">Title:</label></td>
-                        <td><input type="text" name="category" required /></td>
+                        <td><input type="text" name="category" value="{{ title }}" required /></td>
                 </tr>
                 <tr>
                         <td><label for="description">Post:</label></td>
                         <td>
-                                <textarea name="description" placeholder="Describe your post">
+                                <textarea name="description" placeholder="{{ body }}">{{ body }}
                                 </textarea>
                         </td>
                 </tr>
