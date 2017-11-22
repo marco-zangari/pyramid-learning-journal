@@ -7,5 +7,6 @@
         <p>Created <strong>{{ creation_date }}</strong></p>
         <hr />
         <p>{{ body }}</p>
+        <p><a href="{{ request.route_url('update', id=id) }}"><button>Edit</button></a></p>
     </article>
 {% endblock %}
