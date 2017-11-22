@@ -21,17 +21,21 @@ def list_view(request):
 @view_config(route_name='create', renderer='../templates/create.jinja2')
 def create_view(request):
     """Create a new blog post."""
-    if request.method == "POST":
-            if not all([field in request.POST for field in ['title', 'body']]):
-                raise HTTPBadRequest
-            new_entry = Journal(
-                title=request.POST['title'],
-                creation_date=datetime.now().strftime('%B %d, %Y'),
-                body=request.POST['body']
-            )
+    if request.method == "POST" and request.POST:
+        form_names = ['title', 'body']
+
+        if sum([key in request.POST for key in form_names]) == len(form_names):
+            if '' not in list(request.POST.values()):
+                form_data = request.POST
+                new_entry = Journal(
+                    title=form_data['title'],
+                    body=form_data['body'],
+                    creation_date=datetime.now(),
+                )
             request.dbsession.add(new_entry)
-            return HTTPFound(request.route_url('home'))
-    return {}
+            return {}
+    data = request.POST
+    return data
 
 
 @view_config(route_name='detail', renderer='../templates/detail.jinja2')

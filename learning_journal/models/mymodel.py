@@ -18,3 +18,12 @@ class Journal(Base):
     title = Column(Unicode)
     body = Column(Unicode)
     creation_date = Column(DateTime)
+
+    def to_dict(self):
+        """."""
+        return {
+            'id': self.id,
+            'title': self.title,
+            'body': self.body,
+            'creation_date': self.created.strftime('%Y-%m-%d')
+        }

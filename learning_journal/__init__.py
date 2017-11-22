@@ -8,6 +8,7 @@ def main(global_config, **settings):
     config.include('pyramid_jinja2')
     config.include('.routes')
     config.include('.models')
-    config.add_static_view(name='static', path='learning_journal:static')
+    config.include('.views')
+    # config.add_static_view(name='static', path='learning_journal:static')
     config.scan()
     return config.make_wsgi_app()
