@@ -1,5 +1,5 @@
 """Set the default for the application."""
-
+import pdb
 from pyramid.view import view_config
 from learning_journal.data.data_entries import ENTRIES
 from datetime import datetime
@@ -13,6 +13,7 @@ def list_view(request):
     entry = request.dbsession.query(Journal).all()
     if entry is None:
         raise HTTPNotFound
+        pdb.set_trace()
     return {
         "entries": entry
     }
@@ -24,16 +25,17 @@ def create_view(request):
     if request.method == "POST" and request.POST:
         form_names = ['title', 'body']
 
-        if sum([key in request.POST for key in form_names]) == len(form_names):
-            if '' not in list(request.POST.values()):
-                form_data = request.POST
-                new_entry = Journal(
-                    title=form_data['title'],
-                    body=form_data['body'],
-                    creation_date=datetime.now(),
-                )
-            request.dbsession.add(new_entry)
-            return {}
+        # if sum([key in request.POST for key in form_names]) == len(form_names):
+        #     if '' not in list(request.POST.values()):
+        form_data = request.POST
+        new_entry = Journal(
+            title=form_data['title'],
+            body=form_data['body'],
+            creation_date=datetime.now(),
+        )
+        pdb.set_trace()
+        request.dbsession.add(new_entry)
+        return {}
     data = request.POST
     return data
 

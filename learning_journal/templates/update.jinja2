@@ -4,19 +4,19 @@
 <form method="POST">
         <table>
                 <tr>
-                        <td><label for="category">Title:</label></td>
-                        <td><input type="text" name="category" value="{{ title }}" required /></td>
+                        <td><label for="title">Title:</label></td>
+                        <td><input type="text" name="title" value="{{ title }}" required /></td>
                 </tr>
                 <tr>
                         <td><label for="description">Post:</label></td>
                         <td>
-                                <textarea name="description" placeholder="{{ body }}">{{ body }}
+                                <textarea name="body" placeholder="{{ body }}">{{ body }}
                                 </textarea>
                         </td>
                 </tr>
                 <tr>
                         <td></td>
-                        <td><input type="submit" value="Post Updated Post" /></td>
+                        <td><input type="submit" value="Updated Post" /></td>
                 </tr>
         </table>
 </form>
