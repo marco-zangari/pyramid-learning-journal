@@ -13,7 +13,6 @@ def list_view(request):
     entry = request.dbsession.query(Journal).all()
     if entry is None:
         raise HTTPNotFound
-        pdb.set_trace()
     return {
         "entries": entry
     }
@@ -33,7 +32,6 @@ def create_view(request):
             body=form_data['body'],
             creation_date=datetime.now(),
         )
-        pdb.set_trace()
         request.dbsession.add(new_entry)
         return {}
     data = request.POST
